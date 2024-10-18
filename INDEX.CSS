@@ -1,0 +1,139 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-image: url("image (1).jpg");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+
+
+}
+
+/* Auth Container */
+.auth-container {
+    background-color: #cdffbb;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    width: 400px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.form-container {
+    padding: 40px;
+}
+
+.toggle-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+.toggle-buttons button {
+    padding: 12px 25px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    color: #555;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.toggle-buttons button.active {
+    background-color: #2d9cdb; /* Medical blue */
+    color: #fff;
+    border-radius: 30px;
+}
+
+.form {
+    display: none;
+}
+
+.form.active {
+    display: block;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2d9cdb; /* Medical blue */
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #444;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #2d9cdb; /* Medical blue */
+    outline: none;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #27ae60; /* Healing green */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.auth-btn:hover {
+    background-color: #219150; /* Slightly darker green */
+}
+
+p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+}
+
+p span {
+    color: #2d9cdb; /* Medical blue */
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+p span:hover {
+    color: #197bb5; /* Darker blue for hover */
+    text-decoration: underline;
+}

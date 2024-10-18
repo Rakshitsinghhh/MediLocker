@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Record</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+
+    <style>
+         /* Import Roboto Font */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: url("image (1).jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #cdffbb;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #cdffbb;
+}
+
+/* Label styling */
+label {
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Input and button common styling */
+input, button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif; /* Ensures inputs/buttons use the same font */
+}
+
+/* Button specific styling */
+button {
+    margin-top: 20px;
+    background-color: #27ae60;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover state */
+button:hover {
+    background-color: #219150;
+}
+
+/* Focus state for inputs */
+input:focus {
+    border-color: #2a2a72;
+    outline: none;
+    box-shadow: 0 0 5px rgba(42, 42, 114, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Add New Record</h2>
+    <form id="add-record-form" onsubmit="submitForm(event)">
+        <label for="disease">Disease:</label>
+        <input type="text" id="disease" name="disease" placeholder="Enter disease name" required>
+
+        <label for="doctor">Doctor:</label>
+        <input type="text" id="doctor" name="doctor" placeholder="Enter doctor name" required>
+
+        <label for="medicine">Medicine:</label>
+        <input type="text" id="medicine" name="medicine" placeholder="Enter medicine name" required>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+
+<script>
+    function submitForm(event) {
+        event.preventDefault();
+
+        const disease = document.getElementById('disease').value;
+        const doctor = document.getElementById('doctor').value;
+        const medicine = document.getElementById('medicine').value;
+        const date = document.getElementById('date').value;
+
+        const uniqueId = localStorage.getItem('uniqueId'); // Retrieve user ID from localStorage
+
+        if (!uniqueId) {
+            alert("User ID not found. Please log in again.");
+            return;
+        }
+
+        const recordData = { id: uniqueId, disease, doctor, medicine, date };
+
+        fetch('http://localhost:3000/addrecord', { // Ensure the correct URL is used
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(recordData),
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Error adding record');
+            return response.json();
+        })
+        .then(data => {
+            alert(data.message);
+            document.getElementById('add-record-form').reset();
+        })
+        .catch(error => alert('Failed to add record: ' + error));
+    }
+</script>
+
+</body>
+</html>

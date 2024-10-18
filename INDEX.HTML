@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediLocker – Login / Signup</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+    <!-- Login/Signup Container -->
+    <div class="auth-container">
+        <div class="form-container">
+            <!-- Toggle Buttons -->
+            <div class="toggle-buttons">
+                <button id="login-btn" class="toggle-btn active">Login</button>
+                <button id="signup-btn" class="toggle-btn">Signup</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="form active">
+                <div class="input-group">
+                    <label for="userid">Username</label>
+                    <input type="text" id="userid" name="userid" placeholder="Enter your User ID" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="auth-btn">Login</button>
+                <p>New user? <span id="switch-to-signup" class="toggle-link">Sign up here</span></p>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signup-form" class="form">
+                <div class="input-group">
+                    <label for="username">Full Name</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your name" required>
+                </div>
+                <div class="input-group">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required>
+                </div>
+                <div class="input-group">
+                    <label for="new-password">Create Password</label>
+                    <input type="password" id="new-password" name="new-password" placeholder="Create a strong password" required>
+                </div>
+                <button type="submit" class="auth-btn">Signup</button>
+                <p>Already have an account? <span id="switch-to-login" class="toggle-link">Log in here</span></p>
+            </form>
+
+            <!-- Doctor Login Option -->
+            <div class="doctor-login">
+                <p>Are you a doctor? <a href="doclog.html" class="doctor-link">Doctor Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
