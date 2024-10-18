@@ -1,0 +1,47 @@
+mysql> use medilocker;
+Database changed
+mysql> show tables;
++----------------------+
+| Tables_in_medilocker |
++----------------------+
+| doctors              |
+| medicines            |
+| users                |
++----------------------+
+3 rows in set (0.10 sec)
+
+mysql> desc doctor;
+ERROR 1146 (42S02): Table 'medilocker.doctor' doesn't exist
+mysql> desc doctors;
++-------------------+--------------+------+-----+---------+----------------+
+| Field             | Type         | Null | Key | Default | Extra          |
++-------------------+--------------+------+-----+---------+----------------+
+| id                | int          | NO   | PRI | NULL    | auto_increment |
+| doctor_name       | varchar(255) | NO   |     | NULL    |                |
+| doctor_license_id | varchar(100) | NO   |     | NULL    |                |
+| doctor_password   | varchar(255) | NO   |     | NULL    |                |
++-------------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> desc medicines;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| id       | int          | NO   |     | NULL    |       |
+| disease  | varchar(255) | NO   |     | NULL    |       |
+| doctor   | varchar(255) | NO   |     | NULL    |       |
+| medicine | varchar(255) | NO   |     | NULL    |       |
+| date     | date         | NO   |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> desc users;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| id       | int          | NO   | PRI | NULL    | auto_increment |
+| username | varchar(255) | YES  |     | NULL    |                |
+| mobile   | varchar(15)  | NO   |     | NULL    |                |
+| password | varchar(255) | NO   |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
