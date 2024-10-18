@@ -1,0 +1,26 @@
+CREATE DATABASE IF NOT EXISTS medilocker;
+
+USE medilocker;
+
+CREATE TABLE IF NOT EXISTS doctors (
+    id INT NOT NULL AUTO_INCREMENT,
+    doctor_name VARCHAR(255) NOT NULL,
+    doctor_license_id VARCHAR(100) NOT NULL,
+    doctor_password VARCHAR(255) NOT NULL,
+);
+
+CREATE TABLE IF NOT EXISTS medicines (
+    id INT NOT NULL,
+    disease VARCHAR(255) NOT NULL,
+    doctor VARCHAR(255) NOT NULL,
+    medicine VARCHAR(255) NOT NULL,
+    date DATE NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT NOT NULL AUTO_INCREMENT,
+    username VARCHAR(255),
+    mobile VARCHAR(15) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+);
