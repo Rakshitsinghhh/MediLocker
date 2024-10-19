@@ -1,1 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECORD MANAGEMENT</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url("image (1).jpg");
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #cdffbb;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 500px;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #27ae60;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #219150;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        #recordDisplay {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
 
+<div class="container">
+    <h2>RECORD MANAGEMENT</h2>
+    <button onclick="location.href='addrecord.html'">Add New Record</button>
+    <button onclick="fetchRecord()">View Record</button>
+    <div id="recordDisplay"></div> <!-- Div to display the fetched record -->
+</div>
+
+<script>
+    // Retrieve the unique ID from localStorage
+    const uniqueId = localStorage.getItem('uniqueId');
+
+    // Function to print the unique ID to the console
+    function printUniqueId() {
+        if (uniqueId) {
+            console.log('Unique ID:', uniqueId);
+        } else {
+            console.log('No Unique ID found.');
+        }
+    }
+
+    // Call the function to print unique ID when the page loads
+    printUniqueId();
+
+    // Function to fetch the record from the server
+    function fetchRecord() {
+        if (!uniqueId) {
+            alert('No Unique ID found.');
+            return;
+        }
+
+        // Fetch the record from the Node.js backend
+        fetch(`http://localhost:3000/getrecord?uniqueId=${uniqueId}`)
+            .then(response => response.json())
+            .then(data => {
+                // Handle if no records are found
+                if (data.message) {
+                    document.getElementById('recordDisplay').innerText = data.message;
+                    return;
+                }
+
+                let output = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Medicine</th>
+                                <th>Disease</th>
+                                <th>Doctor</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                data.forEach(record => {
+                    const formattedDate = new Date(record.date).toLocaleDateString();
+                    output += `
+                        <tr>
+                            <td>${record.id}</td>
+                            <td>${record.medicine}</td>
+                            <td>${record.disease}</td>
+                            <td>${record.doctor}</td>
+                            <td>${formattedDate}</td>
+                        </tr>
+                    `;
+                });
+
+                output += `</tbody></table>`;
+                document.getElementById('recordDisplay').innerHTML = output;
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                document.getElementById('recordDisplay').innerText = 'Error fetching data.';
+            });
+    }
+</script>
+
+</body>
+</html>

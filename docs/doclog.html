@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Login</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: url("image (1).jpg");
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .form-container {
+            background-color: #cdffbb;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+            width: 300px;
+            text-align: center;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #ffffff;
+            color: #000;
+        }
+        .auth-btn {
+            background-color: #27ae60;
+            color: #ffffff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="form-container">
+            <h2>Doctor Login</h2>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="doctor_license_id">License ID</label>
+                    <input type="text" id="doctor_license_id" name="doctor_license_id" required>
+                </div>
+                <div class="input-group">
+                    <label for="doctor_password">Password</label>
+                    <input type="password" id="doctor_password" name="doctor_password" required>
+                </div>
+                <div class="input-group">
+                    <label for="doctor_unique_id">Patient ID</label>
+                    <input type="text" id="doctor_unique_id" name="doctor_unique_id" required>
+                </div>
+                <button type="submit" class="auth-btn">Login</button>
+                <div class="error-message" id="error-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const errorMessage = document.getElementById('error-message');
+
+        // Predefined credentials (this would be your lookup array)
+        const doctors = [
+            { license_id: 'LICIND00123', password: '1' },
+            { license_id: 'LICIND00456', password: '2' },
+            { license_id: 'LICIND00789', password: '3' }
+        ];
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const doctor_license_id = document.getElementById('doctor_license_id').value;
+            const doctor_password = document.getElementById('doctor_password').value;
+            const uniqueid = document.getElementById('doctor_unique_id').value;
+
+            // Search for a match in the predefined doctors array
+            const doctor = doctors.find(d => d.license_id === doctor_license_id && d.password === doctor_password);
+
+            if (doctor) {
+                // If match is found, save the unique ID to localStorage and redirect to the landing page
+                localStorage.setItem('uniqueId', uniqueid);
+                alert("Login successful!");
+                console.log(uniqueid)
+                window.location.href = 'landingpage.html';
+            } else {
+                // If no match, show error message
+                errorMessage.textContent = 'Invalid License ID or Password';
+            }
+        });
+    </script>
+
+</body>
+</html>
